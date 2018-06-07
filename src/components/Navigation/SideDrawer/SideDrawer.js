@@ -25,7 +25,3 @@ const sideDrawer = (props) => {
 };
 
 export default sideDrawer;
-
-// Rebecca likes carrots
-
-
