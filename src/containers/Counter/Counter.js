@@ -11,11 +11,11 @@ class Counter extends Component {
             <div>
                 <CounterOutput value={this.props.ctr} /> {/* this.props.ctr is now a property populated from our redux state */}
                 <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
-                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
-                <CounterControl label="Add 5" clicked={this.props.onAddCounter}  />
-                <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter}  />
-                <hr/>
-                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter} />
+                <CounterControl label="Add 5" clicked={this.props.onAddCounter} />
+                <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter} />
+                <hr />
+                <button onClick={() => this.props.onStoreResult(this.props.ctr)}>Store Result</button>
                 <ul>
                     {this.props.storedResults.map(result => (
                         <li key={result.id} onClick={() => this.props.onDeleteResult(result.id)}>{result.value}</li>
@@ -24,12 +24,12 @@ class Counter extends Component {
             </div>
         );
     }
-}
+};
 
 const mapStateToProps = state => { // "state" is populated from our redux state
     return {
-        ctr: state.counter, // which allows us to retrieve state values and attribute them to props
-        storedResults: state.results
+        ctr: state.ctr.counter, // which allows us to retrieve state values and attribute them to props
+        storedResults: state.res.results
     };
 };
 
@@ -39,8 +39,8 @@ const mapDispatchToProps = dispatch => {
         onDecrementCounter: () => dispatch({type: actionTypes.DECREMENT}),
         onAddCounter: () => dispatch({type: actionTypes.ADD, payload: {value: 5}}),
         onSubtractCounter: () => dispatch({type: actionTypes.SUBTRACT, payload: {value: 5}}),
-        onStoreResult: () => dispatch({type: actionTypes.STORE_RESULT}),
-        onDeleteResult: (resultId) => dispatch({type: actionTypes.DELETE_RESULT, resultId})
+        onStoreResult: (counter) => dispatch({type: actionTypes.STORE_RESULT, counter}), // we expect to get counter from the onStoreResult click event and pass it along as action.counter to our reducer
+        onDeleteResult: (resultId) => dispatch({type: actionTypes.DELETE_RESULT, resultId}) // ^^ same for resultId, this is how we pass state to our reducers
     };
 };
 
