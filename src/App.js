@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-import Layout from './components/Layout/Layout';
-import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+
+import Persons from './containers/Persons';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Layout>
-          <BurgerBuilder />
-        </Layout>
+        <ol>
+          <li>Turn this app into one which does NOT use local state (in components) but instead uses Redux</li>
+        </ol>
+        <Persons />
       </div>
     );
   }
