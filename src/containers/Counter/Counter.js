@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import * as actionTypes from '../../store/actions';
+// import * as actionTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions/actions';
 
 class Counter extends Component {
     render () {
@@ -35,12 +36,12 @@ const mapStateToProps = state => { // "state" is populated from our redux state
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}),
-        onDecrementCounter: () => dispatch({type: actionTypes.DECREMENT}),
-        onAddCounter: () => dispatch({type: actionTypes.ADD, payload: {value: 5}}),
-        onSubtractCounter: () => dispatch({type: actionTypes.SUBTRACT, payload: {value: 5}}),
-        onStoreResult: (counter) => dispatch({type: actionTypes.STORE_RESULT, counter}), // we expect to get counter from the onStoreResult click event and pass it along as action.counter to our reducer
-        onDeleteResult: (resultId) => dispatch({type: actionTypes.DELETE_RESULT, resultId}) // ^^ same for resultId, this is how we pass state to our reducers
+        onIncrementCounter: () => dispatch(actionCreators.increment()),
+        onDecrementCounter: () => dispatch(actionCreators.decrement()),
+        onAddCounter: () => dispatch(actionCreators.add(5)),
+        onSubtractCounter: () => dispatch(actionCreators.subtract(5)),
+        onStoreResult: (counter) => dispatch(actionCreators.storeResult(counter)), // we expect to get counter from the onStoreResult click event and pass it along as action.counter to our reducer
+        onDeleteResult: (resultId) => dispatch(actionCreators.deleteResult(resultId)) // ^^ same for resultId, this is how we pass state to our reducers
     };
 };
 
