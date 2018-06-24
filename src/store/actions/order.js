@@ -62,7 +62,6 @@ export const fetchOrdersStart = () => {
 };
 
 export const fetchOrders = (token, userId) => {
-    console.log('token',token);
     return dispatch => {
         dispatch(fetchOrdersStart());
 
